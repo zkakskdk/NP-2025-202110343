@@ -11,11 +11,9 @@ class ClientHandler(threading.Thread):
     def run(self):
         try:
             n, msg = recv_frame(self.conn)
-            # N번 동일 프레임 전송
             for _ in range(n):
                 self.conn.sendall(pack_frame(n, msg))
         except Exception as e:
-            # 로깅 간단화
             print(f"[ERROR] {self.addr}: {e}")
         finally:
             self.conn.close()
@@ -38,5 +36,4 @@ class EchoServer:
                 ClientHandler(conn, addr).start()
 
 if __name__ == "__main__":
-    # 예: Ubuntu에서 서버
     EchoServer(port=25000).start()

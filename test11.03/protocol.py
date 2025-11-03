@@ -1,7 +1,7 @@
 # protocol.py
 import struct
 
-HEADER_FMT = "!ii"   # N:int32, LEN:int32 (big-endian)
+HEADER_FMT = "!ii"
 HEADER_SIZE = struct.calcsize(HEADER_FMT)
 
 def pack_frame(n: int, msg: str) -> bytes:

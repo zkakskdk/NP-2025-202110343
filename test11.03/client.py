@@ -3,7 +3,7 @@ import socket, sys
 from protocol import pack_frame, recv_frame
 
 class EchoClient:
-    def __init__(self, host="127.0.0.1", port=25000):
+    def __init__(self, host="127.0.0.1", port=2500):
         self.host = host
         self.port = port
 

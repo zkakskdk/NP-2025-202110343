@@ -1,0 +1,23 @@
+@startuml
+title TCP Echo (Client ↔ Server)
+
+actor Client
+participant Server
+
+Client -> Server : TCP connect()
+Server --> Client : accept()
+
+loop 메시지 송수신 (사용자가 q 입력 전까지)
+  Client -> Server : send("hello")
+  Server --> Client : send("Echo: hello")
+end
+
+Client -> Server : close()
+Server --> Client : close()
+
+note right of Server
+TCP 특징:
+- 연결 지향(3-way handshake)
+- 순서 보장 / 재전송
+end note
+@enduml

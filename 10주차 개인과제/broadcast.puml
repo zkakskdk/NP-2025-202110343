@@ -1,0 +1,24 @@
+@startuml
+title Broadcast (Sender → Same Subnet Receivers)
+
+actor Broadcaster as Sender
+participant "Receiver A" as RA
+participant "Receiver B" as RB
+
+note over Sender
+UDP 브로드캐스트: <broadcast>:3000
+같은 서브넷의 모든 호스트가 수신
+end note
+
+loop 주기적 공지 (예: 2s)
+  Sender -> RA : UDP send("Notice #n", <broadcast>:3000)
+  Sender -> RB : UDP send("Notice #n", <broadcast>:3000)
+  RA --> RA : 화면 출력/로그 기록
+  RB --> RB : 화면 출력/로그 기록
+end
+
+note over RA,RB
+스위치/라우터/방화벽 설정에 따라
+브로드캐스트가 제한될 수 있음
+end note
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+title UDP Echo (Client → Server)
+
+actor Client
+participant Server
+
+note over Client,Server
+UDP는 비연결형이므로 connect/close 없음
+Datagram 단위로 송/수신
+end note
+
+loop 여러 번 전송 가능
+  Client -> Server : UDP send("hello", port=3000)
+  Server --> Client : UDP send("Echo: hello", port=임시 클라포트)
+end
+
+@enduml

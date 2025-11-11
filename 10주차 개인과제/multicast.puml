@@ -1,0 +1,32 @@
+@startuml
+title Multicast (224.1.1.1:5000)
+
+actor Sender
+participant "Network/IGMP" as Net
+participant "Receiver A" as RA
+participant "Receiver B" as RB
+
+== 그룹 가입 (IGMP Join) ==
+RA -> Net : IGMP Join 224.1.1.1
+RB -> Net : IGMP Join 224.1.1.1
+Net --> RA : Join OK
+Net --> RB : Join OK
+
+== 멀티캐스트 송신 ==
+loop 주기적 전송 (TTL=1, 서브넷 내)
+  Sender -> Net : UDP send("Multicast #n", 224.1.1.1:5000)
+  Net -> RA : deliver "Multicast #n"
+  Net -> RB : deliver "Multicast #n"
+end
+
+== 그룹 탈퇴 (옵션) ==
+RA -> Net : IGMP Leave 224.1.1.1
+RB -> Net : IGMP Leave 224.1.1.1
+
+note right of Net
+멀티캐스트 특징:
+- UDP 기반 / IGMP Join/Leave
+- TTL로 전파 범위 제어
+- 네트워크 장비 설정 필요할 수 있음
+end note
+@enduml

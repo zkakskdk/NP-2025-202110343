@@ -6,4 +6,4 @@ def avg(*numbers):
         total += n
         count += 1
 
-    return total / coun
+    return total / count

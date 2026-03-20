@@ -5,8 +5,8 @@ import datetime
 import time
 import json
 
-client_id = w0cJGNA0CTo8D_m3KIhy
-client_secret = Zkb8pCyF3V
+client_id = 'w0cJGNA0CTo8D_m3KIhy'
+client_secret = 'Zkb8pCyF3V'
 
 def getRequestUrl(url):
     req = urllib.request.Request(url)
@@ -42,7 +42,7 @@ def getPostData(post, jsonResult, cnt):
     org_link = post['originallink']
     link = post['link']
 
-    pData = datetime.datetime.strptime(post['pubData'], '%a, %d %b %Y %H:%M:%S +0900')
+    pData = datetime.datetime.strptime(post['pubDate'], '%a, %d %b %Y %H:%M:%S +0900')
     pDate = pData.strftime('%Y-%m-%d %H:%M:%S')
 
     jsonResult.append({'cnt': cnt, 'title': title, 'description': description, 'org_link': org_link, 'link': org_link, 'pDate': pDate})
